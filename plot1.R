@@ -6,6 +6,7 @@ library(lubridate)
 plot_period <- interval(ymd("2007-02-01"), ymd("2007-02-02"))
 
 power <- read_delim("data/household_power_consumption.txt", delim=";") %>% 
+    mutate(DateTime=dmy_hms(paste(Date, Time))) %>% 
     mutate(Date = dmy(Date)) %>% 
     mutate(Time = hms(Time)) %>% 
     filter(Date %within% plot_period)
