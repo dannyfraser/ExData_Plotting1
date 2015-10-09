@@ -9,6 +9,8 @@ power <- read_delim("data/household_power_consumption.txt", delim=";") %>%
     mutate(DateTime=dmy_hms(paste(Date, Time))) %>% 
     filter(DateTime %within% plot_period)
 
+png(filename="plot2.png", height=480, width=480)
+
 with(power, 
      plot(
          x=DateTime,
@@ -19,9 +21,4 @@ with(power,
      )
 )
 
-if (!dir.exists("plots")){
-    dir.create("plots")
-}
-
-dev.copy(png, file="plots/plot2.png")
 dev.off()
